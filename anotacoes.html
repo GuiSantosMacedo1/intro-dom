@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sobre o DOM</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
   <header>
-    <h1>Conhecendo o DOM</h1>
+    <h1 id="title">Conhecendo o DOM</h1>
   </header>
   <main>
     <section>
@@ -18,11 +19,11 @@
       <p>É uma representação do documento HTML em forma de objetos, organizada em uma estreutura hierárquica de árvore,
         conhecida como DOM tree.</p>
 
-      <figcaption>
+      <figure>
         <img src="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/example-dom-tree.svg"
           alt="Representação do documento object model">
         <figcaption>Exemplo de DOM tree(árvore do DOM) - Foto: Mozilla</figcaption>
-      </figcaption>
+      </figure>
       <p>Note que cada elemento do HTML está conectado. Chamadados esses elementos de nó (node) dentro dessa
         estrutura.</p>
       <p>Em outros palavras, o navegador basicamente transforma o HTML em uma estrutura que o JavaScript consegue
@@ -42,13 +43,78 @@
         <li><strong>Modificar atributos</strong>: Alterar um src, um arial-label, etc. </li>
       </ul>
     </section>
+    <section>
+      <div class="container-contador">
+        <h2>Exemplo com contador</h2>
+        <p id="contador">0</p>
+        <button id="aumentar">Aumentar</button>
+        <button id="diminuir">Diminuir</button>
+        <p id="mensagem"></p>
+      </div>
+    </section>
+    <section class="criar-elementos">
+      <h2>Criando elementos</h2>
+      <form>
+        <label for="tarefa">Digite a sua tarefa:</label>
+        <input type="text" id="tarefa" name="tarefa" placeholder="Digite a sua tarefa">
+      </form>
+      <button id="adicionar-item">Adicionar Item</button>
+      <ul id="lista"></ul>
+    </section>
   </main>
   <footer>
     <p>&copy; 2024 - Todos os direitos reservados - Guilherme | 2026</p>
   </footer>
 
   <script>
-    console.log("Olá, DOM!");
+    const title = document.getElementById('title');
+    title.textContent = 'Aprendendo o DOM';
+    title.innerHTML = 'Aprendendo o <em>DOM</em>';
+    title.style.color = '#1385f7';
+
+    // Capturando mais de um elemento
+    const sections = document.querySelectorAll('section');
+    sections.forEach((section) => {
+      section.style.backgroundColor = '#09f7';
+    })
+
+    // buttons
+    const btnAumentar = document.querySelector("#aumentar");
+    const btnDiminuir = document.querySelector("#diminuir");
+    const mensagem = document.getElementById("mensagem");
+    const contador = document.getElementById("contador");
+
+    let valor = 0;
+    btnAumentar.addEventListener("click", () => {
+      valor++;
+      contador.textContent = valor;
+      mensagem.textContent = "Valor aumentado com sucesso!";
+    })
+
+    btnDiminuir.addEventListener('click', () => {
+      if (valor > 0) {
+        valor--;
+        contador.textContent = valor;
+        mensagem.textContent = "Valor diminuído com sucesso!";
+      } else {
+        mensagem.textContent = "O valor não pode ser menor que 0";
+      }
+    })
+
+    // Criando elementos
+    const btnAdicionarItem = document.getElementById("adicionar-item");
+    const lista = document.getElementById("lista");
+
+    btnAdicionarItem.addEventListener("click", () => {
+      // Criando elemento li
+      const novoItem = document.createElement("li");
+      // Adicionando o conteúdo do item
+      const item = prompt("Digite o nome do item:");
+      // Adicionando o conteúdo ao elemento li
+      novoItem.textContent = item;
+      // Adicionando o elemento li à lista
+      lista.appendChild(novoItem);
+    })
   </script>
 </body>
 
