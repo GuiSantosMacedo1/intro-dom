@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sobre o DOM</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="anotacoes.css">
 </head>
 
 <body>
@@ -54,11 +54,12 @@
     </section>
     <section class="criar-elementos">
       <h2>Criando elementos</h2>
-      <form>
+      <form id="formulario">
         <label for="tarefa">Digite a sua tarefa:</label>
         <input type="text" id="tarefa" name="tarefa" placeholder="Digite a sua tarefa">
+        <p id="mensagem-formulario"></p>
+        <button id="adicionar-item">Adicionar Item</button>
       </form>
-      <button id="adicionar-item">Adicionar Item</button>
       <ul id="lista"></ul>
     </section>
   </main>
@@ -101,19 +102,52 @@
       }
     })
 
-    // Criando elementos
-    const btnAdicionarItem = document.getElementById("adicionar-item");
-    const lista = document.getElementById("lista");
+    // // Criando elementos
+    // const btnAdicionarItem = document.getElementById("adicionar-item");
+    // const lista = document.getElementById("lista");
 
-    btnAdicionarItem.addEventListener("click", () => {
-      // Criando elemento li
-      const novoItem = document.createElement("li");
-      // Adicionando o conteúdo do item
-      const item = prompt("Digite o nome do item:");
-      // Adicionando o conteúdo ao elemento li
-      novoItem.textContent = item;
+    // btnAdicionarItem.addEventListener("click", () => {
+    //   // Criando elemento li
+    //   const novoItem = document.createElement("li");
+    //   // Adicionando o conteúdo do item
+    //   const item = prompt("Digite o nome do item:");
+    //   // Adicionando o conteúdo ao elemento li
+    //   novoItem.textContent = item;
+    //   // Adicionando o elemento li à lista
+    //   lista.appendChild(novoItem);
+    // })
+
+    // 1 - Capturando elementos
+    const lista = document.querySelector("#lista");
+    const formulario = document.querySelector("#formulario");
+    const inputTarefa = document.querySelector("#tarefa");
+    const mensagemFormulario = document.querySelector("#mensagem-formulario");
+
+    // 2 - Configurando o evento/ação
+    formulario.addEventListener("submit", (event) => {
+      // Impede recarregamento da página ao enviar o formulário
+      event.preventDefault();
+      // Capturando o valor digitado no input e removendo espaços em branco
+      const tarefa = inputTarefa.value.trim();
+      // Cria um novo elemento li
+      const itemLista = document.createElement("li");
+      // Inserindo o conteúdo do input no elemento li
+      if (tarefa === "") {
+        mensagemFormulario.textContent = "Digite uma tarefa válida!";
+        mensagemFormulario.style.color = "red";
+        inputTarefa.style.border = "2px solid red";
+        inputTarefa.focus();
+        return;
+      } else {
+        itemLista.textContent = tarefa;
+        inputTarefa.style.border = "none";
+        mensagemFormulario.textContent = "";
+      }
       // Adicionando o elemento li à lista
-      lista.appendChild(novoItem);
+      lista.appendChild(itemLista);
+      // Limpando o input e devolvendo o foco para ele
+      inputTarefa.value = "";
+      inputTarefa.focus();
     })
   </script>
 </body>
