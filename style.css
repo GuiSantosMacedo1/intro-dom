@@ -2,7 +2,7 @@
   --font-family: 'Poppins', sans-serif;
 
   --color-dark: #17172F;
-  --color-blue: #3A3A5E;
+  --color-blue: #353590;
   --color-pink: #f06aa8;
   --color-lime: #d4f36a;
   --color-creme: #f7f5ff;
@@ -103,6 +103,151 @@ header {
   transform: translateY(0);
 }
 
+/* Modal */
+.modal {
+  width: min(90%, 28rem);
+  margin: 0 auto;
+  border: 0;
+  border-radius: 1.5rem;
+  background-color: var(--color-dark);
+  color: var(--color-creme);
+  overflow: visible;
+  box-shadow: 0 1.5rem 5rem rgba(0, 0, 0, .5);
+
+  &[open] {
+    animation: modal-open .3s ease-in forwards;
+    transform: translateY(0) scale(1);
+  }
+
+  &::backdrop {
+    background-color: rgba(0, 0, 0, .8);
+    backdrop-filter: blur(0.75rem);
+  }
+
+  & .modal-fechar {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+
+    width: 2.5rem;
+    height: 2.5rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    border-radius: 50%;
+
+    cursor: pointer;
+    color: var(--color-creme);
+    background-color: transparent;
+    transition: all .3s ease-in;
+
+    &:hover {
+      background-color: var(--color-pink);
+      color: var(--color-dark);
+    }
+  }
+
+  & .modal-conteudo {
+    padding: 2rem;
+  }
+
+  & .modal-tag {
+    display: inline-block;
+    padding: 0.5rem 0.85rem;
+    margin-bottom: 1rem;
+
+    background-color: var(--color-lime);
+    color: var(--color-dark);
+    border-radius: 2rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+
+  & h2 {
+    font-size: 1.75rem;
+    margin-bottom: 0.75rem;
+    color: var(--color-pink);
+  }
+
+  & p {
+    margin-bottom: 1.5rem;
+    font-size: 0.825rem;
+    opacity: 0.85;
+  }
+
+  & .form-inscricao {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    & div {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    & label {
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    & input {
+      padding: 1rem;
+      border: 0.125rem solid transparent;
+      border-radius: 0.5rem;
+      background-color: var(--color-creme);
+      color: var(--color-dark);
+      font: inherit;
+
+      &:focus {
+        border-color: var(--color-pink);
+      }
+    }
+
+    & .modal-submit {
+      padding: 1rem;
+      border-radius: 1rem;
+      border: none;
+      cursor: pointer;
+      background-color: var(--color-blue);
+      color: var(--color-creme);
+      font-size: 1rem;
+      font-weight: 600;
+      font: inherit;
+      transition: all .3s ease-in;
+
+      &:hover {
+        background-color: var(--color-pink);
+        color: var(--color-dark)
+      }
+    }
+  }
+
+  & .modal-rodape {
+    display: block;
+    margin-top: 1.25rem;
+    text-align: center;
+    font-size: 0.75rem;
+    opacity: 0.6 5;
+  }
+}
+
+
+@keyframes modal-open {
+  from {
+    opacity: 0;
+    transform: translateY(2rem) scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
 @media screen and (min-width: 48rem) {
   .menu {
     position: static;
@@ -114,7 +259,6 @@ header {
 
     flex-direction: row;
     width: auto;
-    /* justify-content: flex-end; */
     align-items: center;
   }
 
