@@ -32,7 +32,7 @@ async function fetchNews() {
 
       const spanData = document.createElement("span");
       spanData.classList.add("card-data");
-      spanData.textContent = new Date(article.publishedAt).toLocaleDateString();
+      spanData.textContent = new Date(article.publishedAt).toLocaleDateString("pt-BR");
 
       const link = document.createElement("a");
       link.textContent = "Leia mais";

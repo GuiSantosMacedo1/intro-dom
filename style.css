@@ -26,6 +26,9 @@ body {
   background-color: var(--color-dark);
   padding: 1rem .5rem;
   border-bottom: .125rem solid var(--color-blue);
+  position: sticky;
+  top: 0;
+  z-index: 10;
 
   & nav {
     max-width: 75rem;
@@ -269,8 +272,9 @@ body {
 
   & .lista-noticias {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(15.625rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(17.625rem, 1fr));
     gap: 1rem;
+
   }
 
   & .card-noticia {
@@ -283,6 +287,11 @@ body {
     flex-direction: column;
 
     transition: all .3s ease-in;
+
+    & div {
+      height: 100%;
+      flex: 1;
+    }
 
     & img {
       width: 100%;
